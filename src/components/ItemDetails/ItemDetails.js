@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import * as CONSTANTS from '../../utils/constants'
 
 class HomeScreen extends Component {
 
@@ -12,7 +13,7 @@ class HomeScreen extends Component {
     }
 
     componentDidMount() {
-        return axios.get(`http://192.168.2.107:9000/pieces/barcode/${this.props.navigation.state.params.data}`).then(result => {
+        return axios.get(`${CONSTANTS.default.backendURL}${this.props.navigation.state.params.data}`).then(result => {
             this.setState({
                 renderPage: true,
                 currentStock: result.data[0]
@@ -24,13 +25,13 @@ class HomeScreen extends Component {
     render() {
 
         const fieldsToDisplay = [
-            { field: '_id', label: 'ID' },
-            { field: 'name', label: 'Car Brand', populate: 'carBrandId' },
-            { field: 'name', label: 'Car Model', populate: 'carModelId' },
-            { field: 'name', label: 'Name' },
-            { field: 'no', label: 'Disponibilty' },
-            { field: 'price', label: 'Price' },
-            { field: 'code', label: 'Bar code' }
+            { field: CONSTANTS.default.detailsFields.id, label: CONSTANTS.default.detailsLabels.id },
+            { field: CONSTANTS.default.detailsFields.name, label: CONSTANTS.default.detailsLabels.carbrand, populate: 'carBrandId' },
+            { field: CONSTANTS.default.detailsFields.name, label: CONSTANTS.default.detailsLabels.carmodel, populate: 'carModelId' },
+            { field: CONSTANTS.default.detailsFields.name, label: CONSTANTS.default.detailsLabels.name },
+            { field: CONSTANTS.default.detailsFields.no, label: CONSTANTS.default.detailsLabels.no },
+            { field: CONSTANTS.default.detailsFields.price, label: CONSTANTS.default.detailsLabels.price },
+            { field: CONSTANTS.default.detailsFields.code, label: CONSTANTS.default.detailsLabels.code }
         ]
 
         if (this.state.renderPage) {
@@ -39,7 +40,7 @@ class HomeScreen extends Component {
                     <View style={styles.container} >
                         <View style={styles.contentContainer}>
                             <View style={styles.titleContainer}>
-                                <Text style={styles.titleText}>Successfully received informations</Text>
+                                <Text style={styles.titleText}>{CONSTANTS.default.success}</Text>
                             </View>
                             <View style={styles.dataContainer}>
                                 {fieldsToDisplay.map((field, index) => {
@@ -63,7 +64,7 @@ class HomeScreen extends Component {
                             </View>
                             <Button onPress={() => {
                                 this.props.navigation.navigate('Home')
-                            }} title="MAIN" />
+                            }} title={CONSTANTS.default.main} />
                         </View>
                     </View >
                 );
@@ -71,11 +72,11 @@ class HomeScreen extends Component {
                 <View style={styles.container} >
                     <View style={styles.contentContainer}>
                         <View style={styles.titleContainer}>
-                            <Text style={styles.titleText}>No results found!</Text>
+                            <Text style={styles.titleText}>{CONSTANTS.default.noData}</Text>
                         </View>
                         <Button onPress={() => {
                             this.props.navigation.navigate('Home')
-                        }} title="MAIN" />
+                        }} title={CONSTANTS.default.main} />
                     </View>
                 </View >
             );
@@ -84,7 +85,7 @@ class HomeScreen extends Component {
             <View style={styles.container} >
                 <View style={styles.contentContainer}>
                     <View style={styles.titleContainer}>
-                        <Text style={styles.titleText}>Searching for results...</Text>
+                        <Text style={styles.titleText}>{CONSTANTS.default.wait}</Text>
                     </View>
                 </View>
             </View >

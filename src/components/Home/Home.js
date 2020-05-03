@@ -20,7 +20,7 @@ const HomeScreen = props => {
             </View>
             <View style={styles.contentContainer}>
                 <Button
-                    title="SCAN CODE"
+                    title={CONSTANTS.default.scanTitle}
                     onPress={() => scanCodeHandler(props)}
                 />
             </View>

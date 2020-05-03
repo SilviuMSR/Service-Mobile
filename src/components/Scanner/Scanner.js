@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import * as CONSTANTS from '../../utils/constants'
 
 export default function Scanner(props) {
     const [hasPermission, setHasPermission] = useState(null);
@@ -23,10 +24,10 @@ export default function Scanner(props) {
     };
 
     if (hasPermission === null) {
-        return <Text>In order to work, we need access to camera!</Text>;
+        return <Text>{CONSTANTS.default.requireAccess}</Text>;
     }
     if (hasPermission === false) {
-        return <Text>No access to camera</Text>;
+        return <Text>{CONSTANTS.default.noAccess}</Text>;
     }
 
     return (
