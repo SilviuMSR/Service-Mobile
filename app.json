@@ -1,0 +1,17 @@
+{
+  "name": "service-manager",
+  "displayName": "service-manager",
+  "expo": {
+    "name": "service-manager",
+    "slug": "service-manager",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
