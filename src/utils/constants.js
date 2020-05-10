@@ -24,5 +24,7 @@ export default {
     success: "Successfully received informations",
     noData: "No results found!",
     wait: "Searching for results...",
-    main: "GO TO MAIN"
+    main: "GO TO MAIN",
+    noAccess: "No access to camera",
+    requireAccess: "In order to work, we need access to camera!"
 };
